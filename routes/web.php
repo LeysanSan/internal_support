@@ -1,10 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+
+
+Route::get('/aziende', [CompanyController::class, 'index']);
+Route::get('/aziende/{id}', [CompanyController::class, 'show']);
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 
 Route::get('/tasks', function () {
 
