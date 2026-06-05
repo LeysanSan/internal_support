@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\TicketController;
 
 
 Route::get('/aziende', [CompanyController::class, 'index']);
 Route::get('/aziende/{id}', [CompanyController::class, 'show']);
+Route::get('/ticket/{id}', [TicketController::class, 'show']);
 
 Route::get('/', function () {
     return view('welcome');

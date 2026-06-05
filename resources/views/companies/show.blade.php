@@ -2,6 +2,14 @@
 
 <p>ID: {{ $company->id }}</p>
 
+<h2>Statistiche</h2>
+
+<ul>
+    <li>Ticket aperti: {{ $openTickets }}</li>
+    <li>Ticket chiusi: {{ $closedTickets }}</li>
+    <li>Ticket in lavorazione: {{ $inProgressTickets }}</li>
+    <li>Ticket persi: {{ $lostTickets }}</li>
+</ul>
 
 <h2>Clienti</h2>
 
@@ -15,9 +23,11 @@
 
 <ul>
     @foreach ($company->tickets as $ticket)
-        <li>
-            {{ $ticket->title }}
-            ({{ $ticket->status }})
-        </li>
+       <li>
+    <a href="/ticket/{{ $ticket->id }}">
+        {{ $ticket->title }}
+    </a>
+    ({{ $ticket->status }})
+</li>
     @endforeach
 </ul>

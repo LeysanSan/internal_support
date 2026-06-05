@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 
 class CompanyController extends Controller
-{
 
+{
 public function index()
 {
     $companies = Company::all();
@@ -18,10 +18,31 @@ public function index()
 
 public function show($id)
 {
-    $company = Company::findOrFail($id);
+    $company = Company::with(['clients', 'tickets'])
+        ->findOrFail($id);
 
-    return view('companies.show', compact('company'));
+    $openTickets = $company->tickets
+        ->where('status', 'open')
+        ->count();
+
+    $closedTickets = $company->tickets
+        ->where('status', 'closed')
+        ->count();
+
+    $inProgressTickets = $company->tickets
+        ->where('status', 'in_progress')
+        ->count();
+
+    $lostTickets = $company->tickets
+        ->where('status', 'lost')
+        ->count();
+
+    return view('companies.show', compact(
+        'company',
+        'openTickets',
+        'closedTickets',
+        'inProgressTickets',
+        'lostTickets'
+    ));
 }
-
-
 }
