@@ -5,6 +5,8 @@
 <h2>Statistiche</h2>
 
 <ul>
+    <li>Clienti registrati: {{ $company->clients->count() }}</li>
+    <li>Ticket totali: {{ $company->tickets->count() }}</li>
     <li>Ticket aperti: {{ $openTickets }}</li>
     <li>Ticket chiusi: {{ $closedTickets }}</li>
     <li>Ticket in lavorazione: {{ $inProgressTickets }}</li>
@@ -23,11 +25,11 @@
 
 <ul>
     @foreach ($company->tickets as $ticket)
-       <li>
-    <a href="/ticket/{{ $ticket->id }}">
-        {{ $ticket->title }}
-    </a>
-    ({{ $ticket->status }})
-</li>
+        <li>
+            <a href="/ticket/{{ $ticket->id }}">
+                {{ $ticket->title }}
+            </a>
+            ({{ $ticket->status }})
+        </li>
     @endforeach
 </ul>
