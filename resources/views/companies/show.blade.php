@@ -17,7 +17,11 @@
 
 <ul>
     @foreach ($company->clients as $client)
-        <li>{{ $client->full_name }}</li>
+        <li>
+            <a href="/clienti/{{ $client->id }}">
+                {{ $client->full_name }}
+            </a>
+        </li>
     @endforeach
 </ul>
 

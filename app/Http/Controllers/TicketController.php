@@ -18,5 +18,11 @@ class TicketController extends Controller
 
         return view('tickets.show', compact('ticket'));
     }
+    public function index()
+{
+    $tickets = Ticket::all();
+
+    return view('tickets.index', compact('tickets'));
+}
 }
 
