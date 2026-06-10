@@ -14,6 +14,7 @@ Route::get('/ticket/{id}', [TicketController::class, 'show']);
 Route::get('/clienti', [ClientController::class, 'index']);
 Route::get('/clienti/{id}', [ClientController::class, 'show']);
 Route::get('/', [DashboardController::class, 'index']);
+Route::get('/tickets/status/{status}', [TicketController::class, 'byStatus']);
 
 //Route::get('/', function () {
     return view('welcome');

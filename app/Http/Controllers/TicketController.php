@@ -18,9 +18,27 @@ class TicketController extends Controller
 
         return view('tickets.show', compact('ticket'));
     }
-    public function index()
+   public function index()
 {
-    $tickets = Ticket::all();
+    $tickets = Ticket::with('company')
+        ->orderByRaw("
+            CASE priority
+                WHEN 'high' THEN 1
+                WHEN 'medium' THEN 2
+                WHEN 'low' THEN 3
+            END
+        ")
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('tickets.index', compact('tickets'));
+}
+
+public function byStatus($status)
+{
+    $tickets = Ticket::with('company')
+        ->where('status', $status)
+        ->get();
 
     return view('tickets.index', compact('tickets'));
 }
