@@ -29,7 +29,7 @@ class TicketController extends Controller
             END
         ")
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(10);
 
     return view('tickets.index', compact('tickets'));
 }
@@ -38,7 +38,8 @@ public function byStatus($status)
 {
     $tickets = Ticket::with('company')
         ->where('status', $status)
-        ->get();
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
     return view('tickets.index', compact('tickets'));
 }

@@ -5,43 +5,50 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Client;
+use App\Models\Ticket;
 
 class CompanyController extends Controller
 
 {
 public function index()
 {
- $companies = Company::withCount('tickets')->get();
+    $companies = Company::withCount([
+        'tickets as open_tickets_count' => function ($query) {
+            $query->where('status', 'open');
+        }
+    ])->paginate(10);
+
     return view('companies.index', compact('companies'));
 }
 
-public function show($id)
+public function show($id, Request $request)
 {
-    $company = Company::with(['clients', 'tickets'])
-        ->findOrFail($id);
+    $company = Company::findOrFail($id);
 
-    $openTickets = $company->tickets
-        ->where('status', 'open')
-        ->count();
+    $status = $request->query('status');
 
-    $closedTickets = $company->tickets
-        ->where('status', 'closed')
-        ->count();
+    $ticketsQuery = Ticket::where('company_id', $id);
 
-    $inProgressTickets = $company->tickets
-        ->where('status', 'in_progress')
-        ->count();
+    if ($status) {
+        $ticketsQuery->where('status', $status);
+    }
 
-    $lostTickets = $company->tickets
-        ->where('status', 'lost')
-        ->count();
+    $tickets = $ticketsQuery->latest()->paginate(5);
+
+    $openTickets = Ticket::where('company_id', $id)->where('status', 'open')->count();
+    $inProgressTickets = Ticket::where('company_id', $id)->where('status', 'in_progress')->count();
+    $closedTickets = Ticket::where('company_id', $id)->where('status', 'closed')->count();
+    $lostTickets = Ticket::where('company_id', $id)->where('status', 'lost')->count();
 
     return view('companies.show', compact(
         'company',
+        'tickets',
         'openTickets',
-        'closedTickets',
         'inProgressTickets',
+        'closedTickets',
         'lostTickets'
     ));
+
 }
 }

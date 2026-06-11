@@ -1,21 +1,44 @@
-<h1>{{ $ticket->title }}</h1>
+@extends('layouts.app')
 
-<p><strong>Azienda:</strong> {{ $ticket->company->name }}</p>
+@section('content')
+    <h1>
+        {{ $ticket->title }}</h1>
 
-<p><strong>Cliente:</strong> {{ $ticket->client->full_name }}</p>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
 
-<p><strong>Stato:</strong> {{ $ticket->status }}</p>
 
-<p><strong>Priorità:</strong> {{ $ticket->priority }}</p>
+            <p><strong>Azienda:</strong> {{ $ticket->company->name }}</p>
 
-<p><strong>Descrizione:</strong> {{ $ticket->description }}</p>
+            <p><strong>Cliente:</strong> {{ $ticket->client->full_name }}</p>
 
-<h2>Cronologia Ticket</h2>
+            <p><strong>Stato:</strong>
+                @if ($ticket->status === 'open')
+                    <span class="badge bg-danger">Aperto</span>
+                @elseif ($ticket->status === 'in_progress')
+                    <span class="badge bg-warning text-dark">
+                        In lavorazione
+                    </span>
+                @elseif ($ticket->status === 'closed')
+                    <span class="badge bg-success">Chiuso</span>
+                @else
+                    <span class="badge bg-secondary">Perso</span>
+                @endif
+            </p>
 
-<ul>
-    @foreach ($ticket->messages as $message)
-        <li>
-            {{ $message->message }}
-        </li>
-    @endforeach
-</ul>
+            <p><strong>Priorità:</strong> {{ $ticket->priority }}</p>
+
+            <p><strong>Descrizione:</strong> {{ $ticket->description }}</p>
+
+            <h2>Cronologia Ticket</h2>
+
+            <ul>
+                @foreach ($ticket->messages as $message)
+                    <li>
+                        {{ $message->message }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+@endsection

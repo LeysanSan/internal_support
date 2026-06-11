@@ -35,9 +35,17 @@
                             </td>
 
                             <td>
-                                <span class="badge bg-secondary">
-                                    {{ $ticket->status }}
-                                </span>
+                                @if ($ticket->status === 'open')
+                                    <span class="badge bg-danger">Aperto</span>
+                                @elseif ($ticket->status === 'in_progress')
+                                    <span class="badge bg-warning text-dark">
+                                        In lavorazione
+                                    </span>
+                                @elseif ($ticket->status === 'closed')
+                                    <span class="badge bg-success">Chiuso</span>
+                                @else
+                                    <span class="badge bg-secondary">Perso</span>
+                                @endif
                             </td>
 
                             <td>
@@ -60,4 +68,8 @@
                 </tbody>
 
             </table>
+
+            <div class="mt-3">
+                {{ $tickets->links() }}
+            </div>
         @endsection
