@@ -41,12 +41,12 @@
 
                 <a class="nav-link" href="/aziende">
                     <i class="bi bi-buildings"></i>
-                    Aziende
+                    Account
                 </a>
 
                 <a class="nav-link" href="/clienti">
                     <i class="bi bi-people"></i>
-                    Clienti
+                    Contatti
                 </a>
 
                 <a class="nav-link" href="/tickets">
@@ -54,6 +54,14 @@
                     Ticket
                 </a>
 
+                <a class="nav-link" href="/workplaces">
+                    <i class="bi bi-ticket-detailed"></i>
+                    Workplace
+                </a>
+                <a class="nav-link" href="/equipment">
+                    <i class="bi bi-ticket-detailed"></i>
+                    Apparechiature
+                </a>
             </div>
 
         </div>

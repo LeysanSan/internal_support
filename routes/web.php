@@ -15,6 +15,20 @@ Route::get('/clienti', [ClientController::class, 'index']);
 Route::get('/clienti/{id}', [ClientController::class, 'show']);
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/tickets/status/{status}', [TicketController::class, 'byStatus']);
+Route::view('/sites/1', 'sites.show');  //temporary for prototyping time
+Route::view('/sites/2', 'sites.show');
+Route::view('/sites/3', 'sites.show');
+
+Route::view('/offices/1', 'offices.show');
+Route::view('/offices/2', 'offices.show');
+Route::view('/offices/3', 'offices.show');
+Route::view('/offices/4', 'offices.show');
+
+Route::view('/workplaces/1', 'workplaces.show');
+Route::view('/workplaces/2', 'workplaces.show');
+Route::view('/workplaces/3', 'workplaces.show');
+
+Route::view('/equipment', 'equipment.show');
 
 //Route::get('/', function () {
     return view('welcome');
