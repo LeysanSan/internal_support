@@ -18,17 +18,28 @@ Route::get('/tickets/status/{status}', [TicketController::class, 'byStatus']);
 Route::view('/sites/1', 'sites.show');  //temporary for prototyping time
 Route::view('/sites/2', 'sites.show');
 Route::view('/sites/3', 'sites.show');
+Route::redirect('/sites', '/sites/1');
 
 Route::view('/offices/1', 'offices.show');
 Route::view('/offices/2', 'offices.show');
 Route::view('/offices/3', 'offices.show');
 Route::view('/offices/4', 'offices.show');
+Route::redirect('/offices', '/offices/1');
 
 Route::view('/workplaces/1', 'workplaces.show');
 Route::view('/workplaces/2', 'workplaces.show');
 Route::view('/workplaces/3', 'workplaces.show');
+Route::redirect('/workplaces', '/workplaces/1');
 
-Route::view('/equipment', 'equipment.show');
+Route::view('/equipment/1', 'equipment.show');
+Route::redirect('/equipment', '/equipment/1');
+Route::redirect('/sites', '/sites/1');
+
+
+
+
+//end of tempopary routes 
+
 
 //Route::get('/', function () {
     return view('welcome');
